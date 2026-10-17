@@ -45,7 +45,7 @@ export default function Doctors() {
   return (
     <>
       <section className="hero">
-        <h1>מצא את הרופא שמתאים לך</h1>
+        <h1>מצא רופא וקבע תור בקליק</h1>
         <div className="search two">
           <input aria-label="חיפוש לפי שם רופא" placeholder="חיפוש לפי שם רופא" value={query} onChange={(e) => setQuery(e.target.value)}
             onKeyDown={(e) => e.key === 'Enter' && scrollToResults()} />

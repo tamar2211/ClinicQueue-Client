@@ -1,6 +1,6 @@
 :root {
-  --navy: #1f2d4d; --ink2: #51607e; --sky: #0b7db8; --sky2: #096a9d;
-  --hero: #eaf5fb; --tile: #cfe6f4; --line: #e3eaf1; --bg: #fff;
+  --navy: #1f2d4d; --ink2: #51607e; --sky: #74659c; --sky2: #5f5285;
+  --hero: #f4f2f8; --tile: #e6e2ef; --line: #e3eaf1; --bg: #fff;
   --err: #a12a2a; --errbg: #fdeeee; --ok: #1d6b4f; --okbg: #e6f5ee;
   --shadow: 0 1px 2px rgba(31, 45, 77, .05), 0 14px 30px -14px rgba(31, 45, 77, .18);
 }
@@ -12,9 +12,11 @@ button { font-family: inherit; }
 /* ---------- סרגל עליון ---------- */
 .topbar { border-bottom: 1px solid var(--line); background: #fff; position: sticky; top: 0; z-index: 5; }
 .bar { max-width: 1100px; margin: auto; padding: 0 24px; height: 72px; display: flex; align-items: center; gap: 32px; }
-.logo { font-size: 26px; font-weight: 700; color: var(--sky); letter-spacing: -.01em; }
-.logo b { color: var(--navy); }
-.logo.big { font-size: 34px; margin-bottom: 28px; }
+.logo { display: flex; align-items: center; gap: 10px; font-size: 28px; font-weight: 800; letter-spacing: -.02em; line-height: 1; }
+.logo .mark { width: 1.3em; height: 1.3em; flex: none; filter: drop-shadow(0 6px 10px rgba(116, 101, 156, .35)); }
+.logo b { color: var(--navy); font-weight: 800; }
+.logo .mid { font-size: .7em; font-weight: 500; color: var(--sky); }
+.logo.big { font-size: 38px; margin-bottom: 28px; }
 nav { display: flex; gap: 28px; flex: 1; }
 nav a { color: var(--navy); text-decoration: none; font-size: 15.5px; padding: 6px 0; border-bottom: 2px solid transparent; }
 nav a.active { border-color: var(--sky); }
@@ -54,10 +56,10 @@ h2 { font-weight: 300; font-size: 32px; text-align: center; margin: 52px 0 30px;
 .spec { display: flex; flex-direction: column; align-items: center; gap: 8px; cursor: pointer; background: none; border: 0; color: var(--navy); }
 .ic { width: 64px; height: 64px; display: grid; place-items: center; transition: transform .25s; }
 .ic svg { width: 60px; height: 60px; fill: none; stroke: var(--navy); stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-.ic .f { fill: #bfe3f6; }
+.ic .f { fill: #d9d3e8; }
 .spec:hover .ic { transform: translateY(-3px); }
 .spec-name { font-size: 15.5px; padding-top: 9px; position: relative; }
-.spec-name::before { content: ''; position: absolute; top: 0; left: 50%; width: 36px; height: 2px; margin-left: -18px; background: #bfe3f6; }
+.spec-name::before { content: ''; position: absolute; top: 0; left: 50%; width: 36px; height: 2px; margin-left: -18px; background: #d9d3e8; }
 .spec.on .spec-name { font-weight: 700; }
 .spec.on .spec-name::before { background: var(--sky); }
 
@@ -130,12 +132,12 @@ h2 { font-weight: 300; font-size: 32px; text-align: center; margin: 52px 0 30px;
 .specs { grid-template-columns: repeat(4, 1fr); gap: 16px; max-width: 880px; }
 .spec { background: #fff; border: 1px solid var(--line); border-radius: 22px; padding: 22px 12px 18px; gap: 6px; box-shadow: var(--shadow); transition: transform .25s, border-color .25s, box-shadow .25s; }
 .spec:hover { transform: translateY(-4px); border-color: var(--tile); }
-.spec.on { border-color: var(--sky); background: linear-gradient(180deg, #f3faff, #fff); box-shadow: 0 0 0 3px rgba(11, 125, 184, .12), var(--shadow); }
+.spec.on { border-color: var(--sky); background: linear-gradient(180deg, #f8f7fb, #fff); box-shadow: 0 0 0 3px rgba(116, 101, 156, .12), var(--shadow); }
 .spec:hover .ic { transform: none; }
 .spec-name { text-align: center; }
 
 .topbar { background: rgba(255, 255, 255, .8); backdrop-filter: blur(14px); }
-.hero { background: radial-gradient(900px 340px at 85% -10%, #d6edfa, transparent 70%), linear-gradient(180deg, var(--hero), #f6fbfe); }
+.hero { background: radial-gradient(900px 340px at 85% -10%, #ebe8f3, transparent 70%), linear-gradient(180deg, var(--hero), #fbfafd); }
 .hero h1 { font-size: 42px; margin-bottom: 12px; letter-spacing: -.01em; }
 .stats { text-align: center; color: var(--ink2); margin-bottom: 28px; position: relative; font-size: 16px; }
 .search { background: rgba(255, 255, 255, .7); backdrop-filter: blur(10px); border: 1px solid #fff; border-radius: 20px; padding: 12px; box-shadow: 0 18px 40px -20px rgba(31, 45, 77, .35); }
@@ -163,7 +165,7 @@ h2 { font-weight: 300; font-size: 32px; text-align: center; margin: 52px 0 30px;
 }
 
 /* ---------- זרימת רופא: כרטיסי רופאים, דף רופא, בחירת שעה ---------- */
-:root { --teal: #0a8577; --teal2: #086c60; }
+:root { --teal: #74659c; --teal2: #5f5285; }
 .search.two { grid-template-columns: 2fr 1fr; max-width: 760px; }
 .avatar { border-radius: 50%; object-fit: cover; flex: none; background: var(--hero); }
 .docs { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 18px; }
@@ -229,8 +231,8 @@ h2 { margin: 64px 0 36px; }
 
 /* ---------- כרטיס רופא: שטוח, ברור ולחיץ ---------- */
 .dcard { box-shadow: none; background: #fff; transition: background .2s, border-color .2s, transform .25s; }
-.dcard:hover { background: #f5fbfe; border-color: var(--tile); transform: translateY(-2px); }
-.dcard .pic { background: linear-gradient(135deg, #d6edfa, #bfe3f6); }
+.dcard:hover { background: #f8f7fb; border-color: var(--tile); transform: translateY(-2px); }
+.dcard .pic { background: linear-gradient(135deg, #ebe8f3, #d9d3e8); }
 .dbody { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
 .tags { display: flex; flex-wrap: wrap; gap: 6px; }
 .tag { background: var(--hero); color: var(--sky2); border-radius: 999px; padding: 3px 12px; font-size: 13.5px; }
@@ -240,7 +242,7 @@ h2 { margin: 64px 0 36px; }
 
 /* סמל רופא על עיגול */
 .pic svg { fill: var(--navy); width: auto; }
-.pic { background: linear-gradient(135deg, #d6edfa, #bfe3f6); }
+.pic { background: linear-gradient(135deg, #ebe8f3, #d9d3e8); }
 
 /* הסמל ממלא את העיגול: ראש במרכז והכתפיים נוגעות בשוליים */
 .pic { overflow: hidden; display: flex; align-items: flex-end; justify-content: center; }
@@ -251,7 +253,7 @@ h2 { margin: 64px 0 36px; }
 /* ---------- כרטיס רופא יוקרתי: אנכי, נקי, שלושה פריטים בלבד ---------- */
 .docs { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 22px; }
 .dcard { flex-direction: column; align-items: stretch; gap: 0; padding: 28px 26px 22px; border-radius: 26px; background: #fff; }
-.dcard:hover { background: #fff; border-color: var(--sky); transform: translateY(-4px); box-shadow: 0 22px 40px -22px rgba(11, 125, 184, .45); }
+.dcard:hover { background: #fff; border-color: var(--sky); transform: translateY(-4px); box-shadow: 0 22px 40px -22px rgba(116, 101, 156, .45); }
 .dcard .pic { width: 84px !important; height: 84px !important; margin-bottom: 18px; box-shadow: 0 0 0 4px #fff, 0 0 0 5.5px var(--tile); }
 .dcard .dname { font-size: 19px; font-weight: 600; }
 .dcard .dspec { margin: 4px 0 22px; font-size: 14.5px; color: var(--ink2); min-height: 21px; }

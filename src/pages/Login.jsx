@@ -2,7 +2,7 @@ import { useState } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import { api, errorText } from '../api'
 import { useAuth } from '../auth'
-import { Alert, Field } from '../components'
+import { Alert, Field, Logo } from '../components'
 
 const DEMO = [
   { label: 'כניסה כמטופל (דמו)', email: 'patient@clinic.com' },
@@ -45,8 +45,8 @@ export default function Login() {
   return (
     <div className="auth-page">
       <div className="auth-side">
-        <div className="logo big">דוקתור<b>'ס</b></div>
-        <h1>תור לרופא, בלי לחכות בטלפון.</h1>
+        <Logo big />
+        <h1>הזמנת תור אונליין, בקליק.</h1>
         <ul className="perks">
           <li>אישור מיידי</li>
           <li>ביטול עד 24 שעות לפני התור</li>

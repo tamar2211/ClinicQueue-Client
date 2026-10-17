@@ -1,6 +1,24 @@
 import { NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from './auth'
 
+export function Logo({ big }) {
+  return (
+    <div className={big ? 'logo big' : 'logo'}>
+      <svg className="mark" viewBox="0 0 36 36" aria-hidden="true">
+        <defs>
+          <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+            <stop offset="0" stopColor="var(--sky)" />
+            <stop offset="1" stopColor="var(--sky2)" />
+          </linearGradient>
+        </defs>
+        <rect width="36" height="36" rx="11" fill="url(#lg)" />
+        <path d="M12 7.5v19.5l5-4.6 3.3 7.2 3.4-1.5-3.2-7 6.7-.3z" fill="#fff" strokeLinejoin="round" stroke="#fff" strokeWidth="1.2" />
+      </svg>
+      <span className="wm"><b>קלי</b><span className="mid">ני</span><b>ק</b></span>
+    </div>
+  )
+}
+
 export function Layout() {
   const { user, isAdmin, signOut } = useAuth()
   const { pathname } = useLocation()
@@ -10,7 +28,7 @@ export function Layout() {
     <>
       <header className="topbar">
         <div className="bar">
-          <div className="logo">דוקתור<b>'ס</b></div>
+          <Logo />
           <nav>
             {!isAdmin && <NavLink to="/" className={() => (pathname === '/' || pathname.startsWith('/doctors') ? 'active' : '')}>קביעת תור</NavLink>}
             {!isAdmin && <NavLink to="/my">התורים שלי</NavLink>}
