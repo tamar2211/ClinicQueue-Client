@@ -1,4 +1,4 @@
-import { useEffect, useMemo, useState } from 'react'
+import { useEffect, useMemo, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import { api, errorText } from '../api'
 import { Alert, DoctorAvatar, Empty } from '../components'
@@ -10,6 +10,7 @@ export default function Doctors() {
   const [error, setError] = useState('')
   const [specId, setSpecId] = useState(null)
   const [query, setQuery] = useState('')
+  const resultsRef = useRef(null)
 
   useEffect(() => {
     Promise.all([api.specializations(), api.doctors()])
@@ -24,16 +25,35 @@ export default function Doctors() {
     [doctors, specId, query],
   )
 
+  const filtered = specId !== null || query.trim() !== ''
+  const title = !filtered || !doctors ? 'הרופאים שלנו'
+    : visible.length === 1 ? 'נמצא רופא אחד'
+    : visible.length === 0 ? 'לא נמצאו רופאים'
+    : `נמצאו ${visible.length} רופאים`
+
+  // התוצאות מתחת לאריחי ההתמחויות, לכן גוללים אליהן אחרי חיפוש או בחירה
+  const scrollToResults = () => resultsRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+  const chooseSpec = (id) => { setSpecId(id); if (id !== null) scrollToResults() }
+
+  // הקלדת שם: גוללים כשהמשתמש מפסיק להקליד
+  useEffect(() => {
+    if (!query.trim()) return
+    const t = setTimeout(scrollToResults, 700)
+    return () => clearTimeout(t)
+  }, [query])
+
   return (
     <>
       <section className="hero">
         <h1>מצא את הרופא שמתאים לך</h1>
         <div className="search two">
-          <input aria-label="חיפוש לפי שם רופא" placeholder="חיפוש לפי שם רופא" value={query} onChange={(e) => setQuery(e.target.value)} />
-          <select aria-label="התמחות" value={specId ?? ''} onChange={(e) => setSpecId(e.target.value ? Number(e.target.value) : null)}>
+          <input aria-label="חיפוש לפי שם רופא" placeholder="חיפוש לפי שם רופא" value={query} onChange={(e) => setQuery(e.target.value)}
+            onKeyDown={(e) => e.key === 'Enter' && scrollToResults()} />
+          <select aria-label="התמחות" value={specId ?? ''} onChange={(e) => chooseSpec(e.target.value ? Number(e.target.value) : null)}>
             <option value="">כל ההתמחויות</option>
             {specs.map((s) => <option key={s.id} value={s.id}>{s.name}</option>)}
           </select>
+          <button className="btn" onClick={scrollToResults}>חיפוש</button>
         </div>
       </section>
 
@@ -43,7 +63,7 @@ export default function Doctors() {
             <h2>התמחויות ראשיות</h2>
             <div className="specs">
               {specs.map((s) => (
-                <button key={s.id} className={`spec ${s.id === specId ? 'on' : ''}`} onClick={() => setSpecId(s.id === specId ? null : s.id)}>
+                <button key={s.id} className={`spec ${s.id === specId ? 'on' : ''}`} onClick={() => chooseSpec(s.id === specId ? null : s.id)}>
                   <span className="ic"><SpecIcon name={s.name} /></span>
                   <span className="spec-name">{s.name}</span>
                 </button>
@@ -52,7 +72,7 @@ export default function Doctors() {
           </>
         )}
 
-        <h2>הרופאים שלנו</h2>
+        <h2 ref={resultsRef} className="results-title">{title}</h2>
         <Alert>{error}</Alert>
         {!doctors && !error && <div className="docs">{[0, 1, 2, 3].map((i) => <div key={i} className="dcard skeleton" />)}</div>}
         {doctors && visible.length === 0 && <Empty>לא נמצאו רופאים לפי הסינון שבחרת.</Empty>}

@@ -265,3 +265,9 @@ h2 { margin: 64px 0 36px; }
 
 .pic svg { fill: none; height: 100%; width: auto; margin-bottom: 0; }
 .pic { align-items: flex-end; }
+
+/* חיפוש: כפתור ליד השדות, וגלילה שמתחשבת בכותרת הקבועה */
+.search.two { grid-template-columns: 2fr 1fr auto; }
+.search.two .btn { height: 52px; padding: 0 32px; }
+.results-title { scroll-margin-top: 90px; }
+@media (max-width: 800px) { .search.two { grid-template-columns: 1fr; } }
