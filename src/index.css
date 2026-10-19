@@ -16,6 +16,7 @@ button { font-family: inherit; }
 .logo .mark { width: 1.3em; height: 1.3em; flex: none; filter: drop-shadow(0 6px 10px rgba(116, 101, 156, .35)); }
 .logo b { color: var(--navy); font-weight: 800; }
 .logo .mid { font-size: .7em; font-weight: 500; color: var(--sky); }
+.logo-link { text-decoration: none; color: inherit; display: flex; }
 .logo.big { font-size: 38px; margin-bottom: 28px; }
 nav { display: flex; gap: 28px; flex: 1; }
 nav a { color: var(--navy); text-decoration: none; font-size: 15.5px; padding: 6px 0; border-bottom: 2px solid transparent; }
@@ -273,3 +274,9 @@ h2 { margin: 64px 0 36px; }
 .search.two .btn { height: 52px; padding: 0 32px; }
 .results-title { scroll-margin-top: 90px; }
 @media (max-width: 800px) { .search.two { grid-template-columns: 1fr; } }
+
+/* הצורות הדקורטיביות ברקע נשארות מאחורי הכותרת והחיפוש */
+.hero > * { position: relative; z-index: 1; }
+
+/* בטלפון הפס של "המשך לקביעת תור" לא צף מעל השעות */
+@media (max-width: 800px) { .sticky-bar { position: static; } }

@@ -1,4 +1,4 @@
-import { NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
+import { Link, NavLink, Navigate, Outlet, useLocation } from 'react-router-dom'
 import { useAuth } from './auth'
 
 export function Logo({ big }) {
@@ -28,7 +28,7 @@ export function Layout() {
     <>
       <header className="topbar">
         <div className="bar">
-          <Logo />
+          <Link to={isAdmin ? '/admin' : '/'} className="logo-link" aria-label="לדף הראשי"><Logo /></Link>
           <nav>
             {!isAdmin && <NavLink to="/" className={() => (pathname === '/' || pathname.startsWith('/doctors') ? 'active' : '')}>קביעת תור</NavLink>}
             {!isAdmin && <NavLink to="/my">התורים שלי</NavLink>}

@@ -87,7 +87,7 @@ export default function DoctorPage() {
         </div>
       )}
 
-      <Alert title="התור נתפס זה עתה">{conflict && `${conflict} הרשימה עודכנה, בחר שעה אחרת.`}</Alert>
+      <Alert title="לא ניתן לקבוע את התור">{conflict}</Alert>
 
       {slots && days.length === 0 && <Empty>אין כרגע תורים פנויים אצל הרופא הזה. נסה שוב מאוחר יותר.</Empty>}
 
@@ -97,7 +97,7 @@ export default function DoctorPage() {
           <div className="days">
             {days.map((d) => (
               <button key={d.key} className={`day ${d.key === day.key ? 'on' : ''}`}
-                onClick={() => { setDayChoice(d.key); setSelected(null) }}>
+                onClick={() => { setDayChoice(d.key); setSelected(null); setConflict('') }}>
                 <small>{fmtWeekdayShort(d.first)}</small>
                 <b>{fmtDayNumber(d.first)}</b>
                 <small>{fmtMonthShort(d.first)}</small>
@@ -108,7 +108,7 @@ export default function DoctorPage() {
           <h3 className="section-label">בחר שעה</h3>
           <div className="times">
             {day.slots.map((s) => (
-              <button key={s.id} className={`time ${selected?.id === s.id ? 'on' : ''}`} onClick={() => setSelected(s)}>
+              <button key={s.id} className={`time ${selected?.id === s.id ? 'on' : ''}`} onClick={() => { setSelected(s); setConflict('') }}>
                 {fmtTime(s.startTimeUtc)}
               </button>
             ))}
